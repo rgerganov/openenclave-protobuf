@@ -28,16 +28,16 @@ all:
 build:
 	@ echo "Compilers used: $(CC), $(CXX)"
 	oeedger8r ../helloworld.edl --trusted
-	/usr/local/bin/protoc -I../ ../hello.proto --cpp_out=.
-	$(CXX) -c $(CXXFLAGS) -g -std=c++11 enc.cpp -fPIC -I/usr/local/protobufenclave/include -nostdinc++ -I /usr/local/include
+	/opt/protobuf-nonenc/bin/protoc -I../ ../hello.proto --cpp_out=.
+	$(CXX) -c $(CXXFLAGS) -g -std=c++11 enc.cpp -fPIC -I/opt/protobuf-nonenc/include -nostdinc++ -I /opt/protobuf-nonenc/include 
 	$(CC) -c $(CFLAGS)  -g helloworld_t.c -o helloworld_t.o 
-	$(CXX) -c $(CXXFLAGS) -g -std=c++11 hello.pb.cc -I/usr/local/protobufenclave/include/ -fPIC -pthread -I/usr/local/protobufenclave/include -I/usr/local/include
-	$(CXX) -o helloworldenc.so enc.o helloworld_t.o hello.pb.o -L/usr/local/protobufenclave/lib /usr/local/protobufenclave/lib/libprotobuf.a $(LDFLAGS)
+	$(CXX) -c $(CXXFLAGS) -g -std=c++11 hello.pb.cc -I/opt/protobuf-nonenc/include -fPIC -pthread -I/opt/protobuf-nonenc/include
+	$(CXX) -o helloworldenc.so enc.o helloworld_t.o hello.pb.o  -L/opt/protobuf-enc/lib/ /opt/protobuf-enc/lib/libprotobuf.a  $(LDFLAGS)
 
 
 
 sign:
-	oesign helloworldenc.so helloworld.conf private.pem
+	oesign sign helloworldenc.so helloworld.conf private.pem
 
 clean:
 	rm -f *.so *.o fileencryptor_t.* fileencryptor_args.h private.pem public.pem

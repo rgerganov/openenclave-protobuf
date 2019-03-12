@@ -29,7 +29,7 @@ build:
 	$(CXX) -c  -g $(CXXFLAGS) -std=c++11 host.cpp
 	$(CC) -c -g $(CFLAGS) helloworld_u.c
 	$(CXX) -c -g $(CXXFLAGS) -std=c++11 hello.pb.cc
-	$(CXX) -o helloworldhost host.o helloworld_u.o hello.pb.o $(LDFLAGS) -Wl,--no-undefined -L/usr/local/lib -lprotobuf -pthread 
+	$(CXX) -o helloworldhost host.o helloworld_u.o hello.pb.o /usr/local/lib/libprotobuf.a -Wl,--version-script=version.file  $(LDFLAGS) -Wl,--no-undefined
 
 clean:
 	rm -f file-encryptorhost fileencryptor_u.* fileencryptor_args.h *.o ../out.decrypted ../out.encrypted
