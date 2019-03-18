@@ -1,0 +1,1 @@
+CODEABI_1.0 { global: *main*; local: *; };
