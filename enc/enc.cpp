@@ -8,27 +8,10 @@
 // sdk tool oeedger8r against the helloworld.edl file.
 #include "helloworld_t.h"
 #include "hello.pb.h"
-ssize_t read(int fd, void *buf, size_t count)
-    {
-        printf("***************read called\n");
-        return 0;
-    }
 
-    off_t lseek(int fd, off_t offset, int whence)
-    {
-        printf("***************lseek called\n");
-        return 0;
-    }
-
-    ssize_t write(int fd, const void *buf, size_t count)
-    {
-        printf("***************wrie called\n");
-        return 0;
-    }
 int ecall_run(const char *input,
     uint64_t input_len,
     char **output,
-    uint64_t max_len,
     uint64_t *output_len)
 {
 
@@ -45,7 +28,7 @@ int ecall_run(const char *input,
     str = str + " " + enclave_input.to_greet();
 
     enclave_output.set_greeting_message(str);
-    *output = (char*)oe_host_malloc(max_len);
+    *output = (char*)oe_host_malloc(enclave_output.ByteSize());
     if (!enclave_output.SerializeToArray(*output, enclave_output.ByteSize()))
     {
         return 1;

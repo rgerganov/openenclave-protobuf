@@ -70,7 +70,7 @@ int main(int argc, const char* argv[])
     }
 
     fprintf(stdout, "Host sending: %s :to enclave\n", input.to_greet().c_str());
-    result = ecall_run(enclave, &ret, input_buf, input.ByteSize(), &output_buf, max_len, &output_len);
+    result = ecall_run(enclave, &ret, input_buf, input.ByteSize(), &output_buf, &output_len);
     if (result != OE_OK)
     {
         fprintf(
@@ -93,6 +93,14 @@ int main(int argc, const char* argv[])
     ret = 0;
 
 exit:
+    if(input_buf)
+    {
+        free(input_buf);
+    }
+    if(output_buf)
+    {
+        free(output_buf);
+    }
     // Clean up the enclave if we created one
     if (enclave)
         oe_terminate_enclave(enclave);
