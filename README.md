@@ -3,13 +3,13 @@
 ## Clone the repo
 
 ```bash
-git clone https://github.com/radhikaj/protobuf_prototype
+git clone https://github.com/openenclave/openenclave-protobuf
 git submodule --init
 ```
 ### Apply the patch that enables building libprotobuf_oe_enclave.lib which uses OE headers and compiler flags
 ```bash
+cd protobuf
 git am ../0001-Add-ability-to-build-libprotobuf_oe_enclave.patch
-
 ```
 ## Build protobuf including libraries for host and enclave
 
