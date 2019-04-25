@@ -1,4 +1,4 @@
-# Build and use protobuf with open enclave
+# Build and use protobuf with OpenEnclave
 
 ## Clone the repo
 
