@@ -1,8 +1,0 @@
-# Copyright (c) Microsoft Corporation. All rights reserved.
-# Licensed under the MIT License.
-
-# Update PKG_CONFIG_PATH.
-export PKG_CONFIG_PATH=/home/azureuser/openenclave-install/share/pkgconfig
-
-# Update PATH.
-export PATH=${PATH}:/home/azureuser/openenclave-install/bin
