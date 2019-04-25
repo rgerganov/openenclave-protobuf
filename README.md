@@ -33,6 +33,7 @@ export PKG_CONFIG_PATH=/opt/protobuf/lib/pkgconfig:${PKG_CONFIG_PATH}
 export PATH=/opt/protobuf/bin:${PATH}
 ```
 
-## To build the sample see sample's [README](sample/README.md).
+## Build the sample
+See sample's [README](sample/README.md).
 
 
