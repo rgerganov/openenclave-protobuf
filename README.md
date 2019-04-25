@@ -33,9 +33,6 @@ export PKG_CONFIG_PATH=/opt/protobuf/lib/pkgconfig:${PKG_CONFIG_PATH}
 export PATH=/opt/protobuf/bin:${PATH}
 ```
 
-## Change to the directory of cloned protobuf_prototype and make the sample
-```bash
-make
-```
+## To build the sample see sample's [README](sample/README.md).
 
 
