@@ -1,5 +1,8 @@
 # Build and use protobuf with OpenEnclave
 
+## Build or install OpenEnclave
+See [openenclave repo](https://github.com/Microsoft/openenclave) 
+
 ## Clone the repo
 
 ```bash
