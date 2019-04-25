@@ -1,6 +1,9 @@
-#Build
+## Build
+```bash
 make
+```
 
-#Run
+## Run
+```bash
 host/helloworldhost enc/helloworldenc.so.signed
-
+```
