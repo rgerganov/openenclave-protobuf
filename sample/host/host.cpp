@@ -32,7 +32,7 @@ int main(int argc, const char* argv[])
     oe_enclave_t* enclave = NULL;
     char *output_buf = nullptr, *input_buf = nullptr;
     size_t output_len, max_len = 64;
-    std::string str("radhikaj");
+    std::string str("user");
     hello_world::HelloInput input;
     hello_world::HelloOutput output;
 
