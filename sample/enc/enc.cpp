@@ -15,7 +15,6 @@ int ecall_run(const char *input,
     uint64_t *output_len)
 {
 
-
     hello_world::HelloOutput enclave_output;
     hello_world::HelloInput enclave_input;
     std::string str("Hello");
@@ -29,8 +28,15 @@ int ecall_run(const char *input,
 
     enclave_output.set_greeting_message(str);
     *output = (char*)oe_host_malloc(enclave_output.ByteSize());
+    if(*output == nullptr)
+    {
+        printf("Out of memory\n");
+        return 1;
+    }
+    
     if (!enclave_output.SerializeToArray(*output, enclave_output.ByteSize()))
     {
+        printf("Serialization of enclave output failed\n");
         return 1;
     }
     *output_len = enclave_output.ByteSize();

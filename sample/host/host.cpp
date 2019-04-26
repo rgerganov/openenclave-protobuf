@@ -31,8 +31,8 @@ int main(int argc, const char* argv[])
     int ret = 1;
     oe_enclave_t* enclave = NULL;
     char *output_buf = nullptr, *input_buf = nullptr;
-    size_t output_len, max_len = 64;
-    std::string str("user");
+    size_t output_len;
+    std::string str("User");
     hello_world::HelloInput input;
     hello_world::HelloOutput output;
 
@@ -64,12 +64,24 @@ int main(int argc, const char* argv[])
 
     // Set up protobuf
     input.set_to_greet(str);
+
     input_buf = (char*)malloc(input.ByteSize() * sizeof(char));
-    if (!input.SerializeToArray(input_buf, input.ByteSize())) {
-        printf("Failed to serialize EnclaveInput\n");
+    if(input_buf == nullptr)
+    {
+        fprintf(
+            stderr,
+            "Out of memory\n");
+        goto exit;
     }
 
-    fprintf(stdout, "Host sending: %s :to enclave\n", input.to_greet().c_str());
+    if (!input.SerializeToArray(input_buf, input.ByteSize())) {
+        fprintf(
+            stderr,
+            "Failed to serialize EnclaveInput\n");
+        goto exit;
+    }
+
+    printf("Host sending: %s :to enclave\n", input.to_greet().c_str());
     result = ecall_run(enclave, &ret, input_buf, input.ByteSize(), &output_buf, &output_len);
     if (result != OE_OK)
     {
@@ -84,12 +96,17 @@ int main(int argc, const char* argv[])
 
     if (!output.ParseFromArray(output_buf, output_len))
     {
-        printf("Could not parse output from array\n");
+        fprintf(
+            stderr,
+            "Could not parse output from array\n");
         goto exit;
     }
-    printf("Host received:  %s: from enclave\n", output.greeting_message().c_str());
+    
+    fprintf(
+        stdout,
+        "Host received:  %s: from enclave\n",
+         output.greeting_message().c_str());
 
-    fflush(0);
     ret = 0;
 
 exit:

@@ -40,7 +40,7 @@ sign:
 	oesign sign -e helloworldenc.so -c helloworld.conf -k private.pem
 
 clean:
-	rm -f *.so *.o fileencryptor_t.* fileencryptor_args.h private.pem public.pem
+	rm -f *.so *.o *.so.signed helloworld_t.* helloworld_args.h hello.pb.cc hello.pb.h private.pem public.pem
 
 keys:
 	openssl genrsa -out private.pem -3 3072

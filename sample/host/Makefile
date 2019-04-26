@@ -32,5 +32,5 @@ build:
 	$(CXX) -o helloworldhost host.o helloworld_u.o hello.pb.o $(shell pkg-config protobuf --libs)  -Wl,-version-script=version.file  $(LDFLAGS) -Wl,--no-undefined
 
 clean:
-	rm -f file-encryptorhost fileencryptor_u.* fileencryptor_args.h *.o ../out.decrypted ../out.encrypted
+	rm -f *.o helloworldhost hello.pb.cc hello.pb.h helloworld_u.* helloworld_args.h 
 
