@@ -22,7 +22,7 @@ cd protobuf
 mkdir build
 cd build
 export CXX=/usr/bin/clang++-7
-export CC=/use/bin/clang-7
+export CC=/usr/bin/clang-7
 cmake -Dprotobuf_WITH_ZLIB=OFF -Dprotobuf_BUILD_TESTS=OFF  ../cmake
 make
 ```
