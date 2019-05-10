@@ -1,7 +1,7 @@
 # Build and use protobuf with OpenEnclave
 
 ## Build or install OpenEnclave
-See [openenclave repo](https://github.com/Microsoft/openenclave) 
+See [Open Enclave](https://github.com/Microsoft/openenclave) repo for instructions.
 
 ## Clone the repo
 
