@@ -18,7 +18,6 @@ git am ../0001-Add-ability-to-build-libprotobuf_oe_enclave.patch
 ## Build protobuf including libraries for host and enclave
 
 ```bash
-cd protobuf
 mkdir build
 cd build
 export CXX=/usr/bin/clang++-7
