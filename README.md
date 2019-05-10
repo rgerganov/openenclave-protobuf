@@ -6,8 +6,9 @@ See [openenclave repo](https://github.com/Microsoft/openenclave)
 ## Clone the repo
 
 ```bash
-git clone https://github.com/openenclave/openenclave-protobuf
-git submodule --init
+git clone https://github.com/openenclave/openenclave-protobuf --recursive
+cd openenclave-protobuf
+git submodule init
 ```
 ### Apply the patch that enables building libprotobuf_oe_enclave.lib which uses OE headers and compiler flags
 ```bash
