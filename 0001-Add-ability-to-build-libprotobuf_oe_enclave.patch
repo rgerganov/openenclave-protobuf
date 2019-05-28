@@ -1,4 +1,4 @@
-From 5ba82fb21bc16c4e8159f5e33f7c60b34e02a160 Mon Sep 17 00:00:00 2001
+From 48aa2b95a9b7befa61cd3048827231c884abe4ed Mon Sep 17 00:00:00 2001
 From: radhikaj <radhikaj@live.com>
 Date: Wed, 24 Apr 2019 23:37:09 +0000
 Subject: [PATCH] Add ability to build libprotobuf_oe_enclave
@@ -6,12 +6,14 @@ Subject: [PATCH] Add ability to build libprotobuf_oe_enclave
 Install protobuf_oe_enclave.pc
 
 Remove pthread from cmake target
+
+Add fPIC for compiling protobuf
 ---
  cmake/install.cmake                | 11 +++++++----
- cmake/libprotobuf.cmake            | 20 ++++++++++++++++++++
+ cmake/libprotobuf.cmake            | 23 +++++++++++++++++++++++
  cmake/protobuf_oe_enclave.pc.cmake | 11 +++++++++++
  protobuf_oe_enclave.pc.in          | 12 ++++++++++++
- 4 files changed, 50 insertions(+), 4 deletions(-)
+ 4 files changed, 53 insertions(+), 4 deletions(-)
  create mode 100644 cmake/protobuf_oe_enclave.pc.cmake
  create mode 100644 protobuf_oe_enclave.pc.in
 
@@ -57,10 +59,10 @@ index 9b2ae93..a8bb050 100644
      FILE ${CMAKE_INSTALL_CMAKEDIR}/protobuf-targets.cmake
    )
 diff --git a/cmake/libprotobuf.cmake b/cmake/libprotobuf.cmake
-index 9a434a7..7462539 100644
+index 9a434a7..296bd90 100644
 --- a/cmake/libprotobuf.cmake
 +++ b/cmake/libprotobuf.cmake
-@@ -133,3 +133,23 @@ set_target_properties(libprotobuf PROPERTIES
+@@ -133,3 +133,26 @@ set_target_properties(libprotobuf PROPERTIES
      OUTPUT_NAME ${LIB_PREFIX}protobuf
      DEBUG_POSTFIX "${protobuf_DEBUG_POSTFIX}")
  add_library(protobuf::libprotobuf ALIAS libprotobuf)
@@ -84,6 +86,9 @@ index 9a434a7..7462539 100644
 +    DEBUG_POSTFIX "${protobuf_DEBUG_POSTFIX}")
 +add_library(protobuf::libprotobuf_oe_enclave ALIAS libprotobuf_oe_enclave)
 +
++
++target_compile_options(libprotobuf PUBLIC
++    -fPIC)
 diff --git a/cmake/protobuf_oe_enclave.pc.cmake b/cmake/protobuf_oe_enclave.pc.cmake
 new file mode 100644
 index 0000000..f211b87
