@@ -2,12 +2,14 @@
 // Licensed under the MIT License.
 
 enclave {
+    from "openenclave/edl/syscall.edl" import *;
+    from "platform.edl" import *;
     trusted {
 
-    public int ecall_run([in, size=input_len] const char *input,
-                         uint64_t input_len,
-                         [ user_check] char **output,
-                         [out] uint64_t *output_len);
+        public int ecall_run([in, size=input_len] const char *input,
+                             uint64_t input_len,
+                             [ user_check] char **output,
+                             [out] uint64_t *output_len);
     };
 
 };

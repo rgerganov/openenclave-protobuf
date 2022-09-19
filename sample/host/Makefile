@@ -10,8 +10,8 @@ ifeq ($(C_COMPILER), gcc)
 endif
 
 ifeq ($(USE_GCC),)
-        CC = clang-7
-        CXX = clang++-7
+        CC = clang-10
+        CXX = clang++-10
         C_COMPILER=clang
         CXX_COMPILER=clang++
 endif
@@ -19,12 +19,13 @@ endif
 CFLAGS=$(shell pkg-config oehost-$(C_COMPILER) --cflags) $(shell pkg-config protobuf --cflags)
 CXXFLAGS=$(shell pkg-config oehost-$(CXX_COMPILER) --cflags) $(shell pkg-config protobuf --cflags)
 LDFLAGS=$(shell pkg-config oehost-$(CXX_COMPILER) --libs)
+INCDIR=$(shell pkg-config oehost-$(C_COMPILER) --variable=includedir)
 
 all: build
 
 build:
 	@ echo "Compilers used: $(CC), $(CXX)"
-	oeedger8r ../helloworld.edl --untrusted
+	oeedger8r ../helloworld.edl --untrusted --search-path $(INCDIR) --search-path $(INCDIR)/openenclave/edl/sgx
 	protoc -I../ ../hello.proto --cpp_out=.
 	$(CXX) -c  -g $(CXXFLAGS) -std=c++11 host.cpp
 	$(CC) -c -g $(CFLAGS) helloworld_u.c
